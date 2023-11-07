@@ -13,6 +13,12 @@ const homePage = () => {
   const router = useRouter();
   const {isAuth, setIsAuth} = useContext(DataContext)
 
+  useEffect(()=>{
+    if (!isAuth){
+        router.push('/')
+    }
+  },[])
+
   const handleLogout = () =>{
     signOut(auth)
     .then(() => {
@@ -36,9 +42,12 @@ const homePage = () => {
   // },[])
   return (
   <>
+  <div className=" px-10 py-5">
+
   <Navbar handleLogout={handleLogout}/>
 
   <Feed/>
+  </div>
  
   </>
   );
