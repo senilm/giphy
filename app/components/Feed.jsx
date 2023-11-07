@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import Pagination from "./Pagination";
 import { DataContext } from "../context/DataProvider";
+import Loader from "./Loader";
 
 const Feed = () => {
   const apiKey = "GlVGYHkr3WSBnllca54iNt0yFbjz7L65";
@@ -9,6 +10,7 @@ const Feed = () => {
   const [type, setType] = useState('trending');
   const [currentPage, setCurrentPage] = useState(1);
   const { searchTerm } = useContext(DataContext);
+  const [isLoading, SetIsLoading] = useState(true)
   const limit = 8;
 
   const calculateOffset = (page) => (page - 1) * limit;
@@ -21,10 +23,12 @@ const Feed = () => {
   const fetchGif = async () => {
     const newType = searchTerm ? 'search' : 'trending';
     setType(newType);
+    
     const response = await fetch(apiUrl);
     if (response.ok) {
       const data = await response.json();
       setGifData(data.data);
+      SetIsLoading(false)
     } else {
       throw new Error('Failed to fetch data');
     }
@@ -50,29 +54,39 @@ const Feed = () => {
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-4 mt-4">
-      {gifData.map((gif) => (
-        <div className="flex flex-col relative">
-        <div key={gif.id} className="w-full p-0 overflow-hidden shadow-md p-2  rounded-lg ">
-          <iframe src={gif.embed_url} alt="Gif" className="w-full h-auto relative hover:scale-125 transition-all " />
+      {isLoading ? (
+        <div className="min-w-screen">
+        <Loader />
         </div>
-        <div className="p-2">
-        <p className="text-center text-gray-700 font-semibold">
-          {gif.title}
-        </p>
-
-      </div>
+      ) : (
+        <>
+        <div className="grid grid-cols-4 gap-4 mt-4">
+          {gifData.map((gif) => (
+            <div className="flex flex-col relative" key={gif.id}>
+              <div className="w-full overflow-hidden shadow-md p-2 rounded-lg">
+                <iframe
+                  src={gif.embed_url}
+                  alt="Gif"
+                  className="w-full h-auto relative hover:scale-125 transition-all"
+                  />
+              </div>
+              <div className="p-2">
+                <p className="text-center text-gray-700 font-semibold">{gif.title}</p>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-
-      <Pagination
+        <Pagination
         onPreviousClick={handlePreviousClick}
         onNextClick={handleNextClick}
         currentPage={currentPage}
         handleButtonClick={handleButtonClick}
-      />
+        />
+        </>
+      )}
+      
     </>
   );
+  
 };
 export default Feed;
