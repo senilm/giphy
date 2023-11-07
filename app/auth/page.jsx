@@ -36,13 +36,15 @@ const loginRegister = () => {
 
   const handleRegistration = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, registerData.email, registerData.password);
   
       await updateProfile(auth.currentUser, {
         displayName: registerData.name
       });
-  
+      
+      setIsLoading(false)
       const userId = userCredential.user.uid;
   
       await setDoc(doc(db, 'users', userId), {
@@ -57,6 +59,7 @@ const loginRegister = () => {
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
+      setIsLoading(false)
       setRegisterData(registerInitial);
       console.error('Registration error:', error);
     }
