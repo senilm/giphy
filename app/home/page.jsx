@@ -43,13 +43,13 @@ const homePage = () => {
   // },[])
   return (
   <>
-  <div className=" px-10 py-5 bg-gray-100">
-    <div className="rounded-[20px] bg-white px-5 py-3">
-  <Navbar handleLogout={handleLogout}/>
-  <Feed/>
-    </div>
+  <div className="px-4 sm:px-6 md:px-8 lg:px-10 py-5 bg-gray-100">
+  <div className="rounded-lg bg-white px-4 sm:px-5 md:px-6 lg:px-10 py-3">
+    <Navbar handleLogout={handleLogout} />
+    <Feed />
   </div>
- 
+</div>
+
   </>
   );
 };

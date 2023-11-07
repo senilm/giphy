@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useContext, useEffect, useState } from "react";
 import Pagination from "./Pagination";
 import { DataContext } from "../context/DataProvider";
@@ -7,7 +7,7 @@ import Loader from "./Loader";
 const Feed = () => {
   const apiKey = "GlVGYHkr3WSBnllca54iNt0yFbjz7L65";
   const [gifData, setGifData] = useState([]);
-  const [type, setType] = useState('trending');
+  const [type, setType] = useState("trending");
   const [currentPage, setCurrentPage] = useState(1);
   const { searchTerm } = useContext(DataContext);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,22 +15,23 @@ const Feed = () => {
 
   const calculateOffset = (page) => (page - 1) * limit;
 
-  const apiUrl = `https://api.giphy.com/v1/gifs/${type}?api_key=${apiKey}&q=${searchTerm}&limit=${limit}&offset=${calculateOffset(currentPage)}`;
+  const apiUrl = `https://api.giphy.com/v1/gifs/${type}?api_key=${apiKey}&q=${searchTerm}&limit=${limit}&offset=${calculateOffset(
+    currentPage
+  )}`;
 
   let debounceTimeout;
 
-
   const fetchGif = async () => {
-    const newType = searchTerm ? 'search' : 'trending';
+    const newType = searchTerm ? "search" : "trending";
     setType(newType);
-    
+
     const response = await fetch(apiUrl);
     if (response.ok) {
       const data = await response.json();
       setGifData(data.data);
       setIsLoading(false);
     } else {
-      throw new Error('Failed to fetch data');
+      throw new Error("Failed to fetch data");
     }
   };
 
@@ -42,8 +43,8 @@ const Feed = () => {
     // Set a new debounce timeout
     debounceTimeout = setTimeout(() => {
       fetchGif();
-    }, 500); 
-    
+    }, 500);
+
     // Clean up the timeout when the component unmounts
     return () => {
       if (debounceTimeout) {
@@ -58,9 +59,9 @@ const Feed = () => {
     }
   };
 
-  const handleButtonClick = (num) =>{
+  const handleButtonClick = (num) => {
     setCurrentPage(num);
-  }
+  };
 
   const handleNextClick = () => {
     setCurrentPage(currentPage + 1);
@@ -74,7 +75,7 @@ const Feed = () => {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-4 gap-4 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
             {gifData.map((gif) => (
               <div className="flex flex-col relative" key={gif.id}>
                 <div className="w-full overflow-hidden shadow-md p-2 rounded-lg">
@@ -85,7 +86,9 @@ const Feed = () => {
                   />
                 </div>
                 <div className="p-2">
-                  <p className="text-center text-gray-700 font-semibold">{gif.title}</p>
+                  <p className="text-center text-gray-700 font-semibold">
+                    {gif.title}
+                  </p>
                 </div>
               </div>
             ))}
@@ -103,7 +106,3 @@ const Feed = () => {
 };
 
 export default Feed;
-
-
-
-

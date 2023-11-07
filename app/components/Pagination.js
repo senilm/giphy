@@ -12,7 +12,7 @@ const Pagination = ({ onPreviousClick, onNextClick, currentPage,handleButtonClic
       <>
       <div className="flex justify-center my-4">
         {currentPage > 1 && (
-          <Button feature={onPreviousClick}  label={'Previous'}/>
+          <Button feature={onPreviousClick}  label={'Prev'}/>
         )}
         <div className="flex">
         {pageNumbers.map((pageNum)=>(
