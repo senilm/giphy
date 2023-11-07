@@ -9,7 +9,7 @@ import Pagination from "../components/Pagination";
 import Feed from "../components/Feed";
 import Navbar from "../components/Navbar";
 
-const homePage = () => {
+const HomePage = () => {
   const router = useRouter();
   const {isAuth, setIsAuth} = useContext(DataContext)
 
@@ -17,7 +17,7 @@ const homePage = () => {
     if (localStorage.getItem('isAuthenticated')!== 'true'){
         router.push('/')
     }
-  },[])
+  },[router])
 
   const handleLogout = () =>{
     signOut(auth)
@@ -54,4 +54,4 @@ const homePage = () => {
   );
 };
 
-export default homePage;
+export default HomePage;

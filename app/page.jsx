@@ -17,7 +17,7 @@ export default function Home() {
     } else {
       router.push('/auth'); 
     }
-  }, [isAuth]);
+  }, [isAuth,router]);
   
   
   return (

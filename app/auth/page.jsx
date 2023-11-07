@@ -25,7 +25,7 @@ const registerInitial = {
 };
 
 
-const loginRegister = () => {
+const LoginRegister = () => {
   const [loginData, setLoginData] = useState(loginInitial);
   const [registerData, setRegisterData] = useState(registerInitial);
   const [formType, SetFormType] = useState("login");
@@ -252,4 +252,4 @@ const loginRegister = () => {
   );
 };
 
-export default loginRegister;
+export default LoginRegister;
