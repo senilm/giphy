@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile
 } from "firebase/auth";
-
+import Button from "../components/Button";
 import { useRouter } from "next/navigation";
 import { setDoc, doc } from 'firebase/firestore'
 import { useState } from "react";
