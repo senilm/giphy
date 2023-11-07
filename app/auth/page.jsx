@@ -32,6 +32,7 @@ const loginRegister = () => {
   const router = useRouter()
   const {isAuth,setIsAuth} = useContext(DataContext)
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMsg, setErrorMsg] = useState(' ')
   // const auth = getAuth();
 
   const handleRegistration = async (e) => {
@@ -60,6 +61,7 @@ const loginRegister = () => {
       const errorCode = error.code;
       const errorMessage = error.message;
       setIsLoading(false)
+      setErrorMsg(errorMessage.split('Error')[1])
       setRegisterData(registerInitial);
       console.error('Registration error:', error);
     }
@@ -83,7 +85,7 @@ const loginRegister = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setIsLoading(false)
-        console.log(errorMessage);
+        setErrorMsg(errorMessage.split('Error')[1])
         setLoginData(loginInitial)
       });
       
@@ -106,6 +108,7 @@ const loginRegister = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-200">
       <div className="bg-white shadow-md rounded-[10px] w-[22rem] px-8 pt-6 pb-8 mb-4">
         <h1 className="text-2xl font-bold mb-6 text-center">Registration</h1>
+        <p className="text-md text-center text-red-400">{errorMsg}</p>
         <form className="max-w-md mx-auto mt-4" onSubmit={handleRegistration}>
           <div className="mb-4">
             <label
@@ -187,6 +190,7 @@ const loginRegister = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-200">
       <div className="bg-white shadow-md rounded px-8 pt-6 w-[22rem] pb-8 mb-4">
         <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
+        <p className="text-md text-center text-red-400">{errorMsg}</p>
         <form className="max-w-md mx-auto mt-4" onSubmit={handleLogin}>
           <div className="mb-4">
             <label

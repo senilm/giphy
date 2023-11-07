@@ -5,8 +5,8 @@ const ButtonLoader = () => {
         <div className='w-full flex justify-center '>
             <ColorRing
       visible={true}
-      height="28"
-      width="40"
+      height="24"
+      width="30"
       ariaLabel="blocks-loading"
       wrapperStyle={{}}
       wrapperClass="blocks-wrapper"
