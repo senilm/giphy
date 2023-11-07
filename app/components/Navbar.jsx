@@ -6,7 +6,7 @@ const Navbar = ({ handleLogout }) => {
 
 const {SetSearchTerm} = useContext(DataContext)
   return (
-    <nav>
+    <nav className=" bg-white rounded-2xl p-3">
       <div className="flex justify-between">
         <div id="logo">Logo</div>
         <div className="flex gap-5">

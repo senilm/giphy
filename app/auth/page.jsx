@@ -67,7 +67,6 @@ const loginRegister = () => {
     const user = await signInWithEmailAndPassword(auth, loginData.email, loginData.password)
       .then((userCredential) => {  
         const user = userCredential.user;
-        
         setLoginData(loginInitial)
         setIsAuth(true)
         localStorage.setItem('isAuthenticated','true')
@@ -97,8 +96,8 @@ const loginRegister = () => {
 
   return formType === "register" ? (
     <div className="min-h-screen flex items-center justify-center bg-gray-200">
-      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h1 className="text-2xl font-bold mb-6">Registration</h1>
+      <div className="bg-white shadow-md rounded-[10px] w-[22rem] px-8 pt-6 pb-8 mb-4">
+        <h1 className="text-2xl font-bold mb-6 text-center">Registration</h1>
         <form className="max-w-md mx-auto mt-4" onSubmit={handleRegistration}>
           <div className="mb-4">
             <label
@@ -154,18 +153,18 @@ const loginRegister = () => {
               required
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex justify-center">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Register
             </button>
           </div>
-          <p>OR</p>
-          <div className="flex items-center justify-between">
+          <p className="my-2 text-center">OR</p>
+          <div className="flex items-center justify-center">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
               onClick={handleFormType}
             >
@@ -177,8 +176,8 @@ const loginRegister = () => {
     </div>
   ) : (
     <div className="min-h-screen flex items-center justify-center bg-gray-200">
-      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h1 className="text-2xl font-bold mb-6">Login</h1>
+      <div className="bg-white shadow-md rounded px-8 pt-6 w-[22rem] pb-8 mb-4">
+        <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
         <form className="max-w-md mx-auto mt-4" onSubmit={handleLogin}>
           <div className="mb-4">
             <label
@@ -216,18 +215,18 @@ const loginRegister = () => {
               required
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex justify-center">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Login
             </button>
           </div>
-          <div>OR</div>
-          <div className="flex items-center justify-between">
+          <div className="text-center my-2">OR</div>
+          <div className="flex items-center justify-center">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
               onClick={handleFormType}
             >

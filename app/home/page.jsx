@@ -24,6 +24,7 @@ const homePage = () => {
     .then(() => {
       console.log('signed out');
       setIsAuth(false)
+      localStorage.clear()
       router.push('/')
     })
     .catch((error) => {
@@ -42,7 +43,7 @@ const homePage = () => {
   // },[])
   return (
   <>
-  <div className=" px-10 py-5">
+  <div className=" px-10 py-5 bg-gray-100">
 
   <Navbar handleLogout={handleLogout}/>
 
