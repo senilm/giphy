@@ -44,10 +44,10 @@ const homePage = () => {
   return (
   <>
   <div className=" px-10 py-5 bg-gray-100">
-
+    <div className="rounded-[20px] bg-white px-5 py-3">
   <Navbar handleLogout={handleLogout}/>
-
   <Feed/>
+    </div>
   </div>
  
   </>
