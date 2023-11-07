@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useContext } from "react";
 import { DataContext } from "./context/DataProvider";
-
+import Loader from "./components/Loader";
 
 export default function Home() {
   const router = useRouter();
@@ -21,8 +21,8 @@ export default function Home() {
   
   
   return (
-    <div>
-      <p>Loading...</p>
+    <div className="flex w-screen h-screen justify-center items-center">
+      <Loader/>
     </div>
   );
 }
