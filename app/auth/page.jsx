@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile
 } from "firebase/auth";
+
 import { useRouter } from "next/navigation";
 import { setDoc, doc } from 'firebase/firestore'
 import { useState } from "react";
@@ -69,7 +70,8 @@ const loginRegister = () => {
         
         setLoginData(loginInitial)
         setIsAuth(true)
-        router.push('/')
+        localStorage.setItem('isAuthenticated','true')
+        router.push('/home')
       })
       .catch((error) => {
         const errorCode = error.code;

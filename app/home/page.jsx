@@ -14,7 +14,7 @@ const homePage = () => {
   const {isAuth, setIsAuth} = useContext(DataContext)
 
   useEffect(()=>{
-    if (!isAuth){
+    if (localStorage.getItem('isAuthenticated')!== 'true'){
         router.push('/')
     }
   },[])
