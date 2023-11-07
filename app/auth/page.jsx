@@ -12,6 +12,7 @@ import { setDoc, doc } from 'firebase/firestore'
 import { useState } from "react";
 import { useContext } from "react";
 import { DataContext } from "../context/DataProvider";
+import ButtonLoader from "../components/ButtonLoader";
 
 const loginInitial = {
   email: "",
@@ -162,7 +163,8 @@ const loginRegister = () => {
               className="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Register
+              {isLoading ? <ButtonLoader/> : 'Register'}
+              
             </button>
           </div>
           <p className="my-2 text-center">OR</p>
@@ -224,7 +226,7 @@ const loginRegister = () => {
               className="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Login
+              {isLoading ? <ButtonLoader/> : 'Login'}
             </button>
           </div>
           <div className="text-center my-2">OR</div>
