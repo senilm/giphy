@@ -30,6 +30,7 @@ const loginRegister = () => {
   const [formType, SetFormType] = useState("login");
   const router = useRouter()
   const {isAuth,setIsAuth} = useContext(DataContext)
+  const [isLoading, setIsLoading] = useState(false)
   // const auth = getAuth();
 
   const handleRegistration = async (e) => {
@@ -64,17 +65,20 @@ const loginRegister = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     const user = await signInWithEmailAndPassword(auth, loginData.email, loginData.password)
       .then((userCredential) => {  
         const user = userCredential.user;
         setLoginData(loginInitial)
         setIsAuth(true)
         localStorage.setItem('isAuthenticated','true')
+        setIsLoading(false)
         router.push('/home')
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setIsLoading(false)
         console.log(errorMessage);
         setLoginData(loginInitial)
       });
