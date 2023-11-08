@@ -7,6 +7,8 @@ import { useContext } from "react";
 import { DataContext } from "./context/DataProvider";
 import Loader from "./components/Loader";
 
+
+
 export default function Home() {
   const router = useRouter();
   const {isAuth} = useContext(DataContext)

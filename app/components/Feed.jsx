@@ -3,8 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import Pagination from "./Pagination";
 import { DataContext } from "../context/DataProvider";
 import Loader from "./Loader";
+import { getDoc,doc } from "firebase/firestore";
+import { db } from "../firebase";
 
-const Feed = () => {
+const Feed = ({authUser}) => {
   const apiKey = "GlVGYHkr3WSBnllca54iNt0yFbjz7L65";
   const [gifData, setGifData] = useState([]);
   const [type, setType] = useState("trending");
@@ -12,6 +14,8 @@ const Feed = () => {
   const { searchTerm } = useContext(DataContext);
   const [isLoading, setIsLoading] = useState(true);
   const limit = 8;
+  const [faved, setFaved] = useState(false)
+  const [favorites, setFavorites] = useState([])
 
   const calculateOffset = (page) => (page - 1) * limit;
 
@@ -20,6 +24,19 @@ const Feed = () => {
   )}`;
 
   let debounceTimeout;
+
+  useEffect(() => {
+    const fetchUserFavorites = async () => {
+        try {
+            const userFavoriteGif = await getDoc(doc(db, 'users', authUser?.uid))
+            setFavorites(userFavoriteGif.data()?.favoriteGif)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    fetchUserFavorites()
+}, [])
+
 
   const fetchGif = async () => {
     const newType = searchTerm ? "search" : "trending";
@@ -67,6 +84,12 @@ const Feed = () => {
     setCurrentPage(currentPage + 1);
   };
 
+  const handleFavorite = async (gifId) =>{
+    const response = await fetch(`api/favorite/${authUser}?gifId=${gifId}`)
+    const data = await response.json()
+    setFaved(prev => !prev)
+  }
+
   return (
     <>
       {isLoading ? (
@@ -85,10 +108,13 @@ const Feed = () => {
                     className="w-full h-auto relative hover:scale-125 transition-all"
                   />
                 </div>
-                <div className="p-2">
+                <div className="p-2 flex justify-between">
                   <p className="text-center text-gray-700 font-semibold">
                     {gif.title}
                   </p>
+                  {favorites.includes(gif.id)? 
+                  <button onClick={()=>handleFavorite(gif.id)}>Remove</button>:
+                  <button onClick={()=>handleFavorite(gif.id)}>Add to Favs</button>}
                 </div>
               </div>
             ))}
