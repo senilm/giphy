@@ -35,7 +35,7 @@ const Feed = ({authUser}) => {
         }
     }
     fetchUserFavorites()
-}, [])
+}, [setFaved])
 
 
   const fetchGif = async () => {
@@ -112,9 +112,11 @@ const Feed = ({authUser}) => {
                   <p className="text-center text-gray-700 font-semibold">
                     {gif.title}
                   </p>
-                  {favorites.includes(gif.id)? 
-                  <button onClick={()=>handleFavorite(gif.id)}>Remove</button>:
-                  <button onClick={()=>handleFavorite(gif.id)}>Add to Favs</button>}
+                  {favorites.includes(gif.id) ? (
+  <button onClick={() => handleFavorite(gif.id)}>Remove from Favs</button>
+) : (
+  <button onClick={() => handleFavorite(gif.id)}>Add to Favs</button>
+)}
                 </div>
               </div>
             ))}
